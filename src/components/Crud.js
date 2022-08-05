@@ -27,9 +27,12 @@ const Crud = () =>{
         setAllData([...allData])
     }
 
-    
+    //Modification
+    const handleEdit = (index) =>{
 
-
+        //REcuperer les donner à modifier
+        setName(allData[index])
+    }
 
     return(
         <div>
@@ -44,7 +47,9 @@ const Crud = () =>{
                 {allData.map((liste, index)=>(
                        <div className='liste' key={`${liste}-${index}`}>
                             <div className='name'>{liste}</div>
-                            <button className='submit' onClick={handleEdit}>Edit</button>
+                            <button className='submit' onClick={()=>
+                                handleEdit(index)
+                                }>Edit</button>
 
                             <button className='submit' onClick={()=>{
                                 handleDelete(index)
