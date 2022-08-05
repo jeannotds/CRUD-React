@@ -19,7 +19,17 @@ const Crud = () =>{
             alert('Remplir le formulaire !')
         }
     }
-    // console.log(allData)
+
+    // SUpprimer
+    const handleDelete = (index) =>{
+        console.log(index)
+        allData.splice(index, 1)
+        setAllData([...allData])
+    }
+
+    
+
+
 
     return(
         <div>
@@ -29,12 +39,19 @@ const Crud = () =>{
             }}/>
             <button onClick={handleAdd}>Add</button>
             
+            <h2>Liste</h2>
 
-            <div>
-                {allData.map((liste)=>(
-                    <div key={liste}>{liste}</div>
+                {allData.map((liste, index)=>(
+                       <div className='liste' key={`${liste}-${index}`}>
+                            <div className='name'>{liste}</div>
+                            <button className='submit' onClick={handleEdit}>Edit</button>
+
+                            <button className='submit' onClick={()=>{
+                                handleDelete(index)
+                            }}>Delete</button>
+                       </div>
                 ))}
-            </div>
+
         </div>
     )
 }
