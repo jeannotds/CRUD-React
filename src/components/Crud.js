@@ -4,8 +4,9 @@ import '../styles/Crud.css'
 
 const Crud = () =>{
     const [name, setName] = useState("")
-
     const [allData, setAllData] = useState([])
+    const [isShow, setIsShow] = useState(false)
+    const [editIndex, setEditIndex] = useState()
 
     const handleAdd = (e) =>{
         e.preventDefault()
@@ -29,9 +30,18 @@ const Crud = () =>{
 
     //Modification
     const handleEdit = (index) =>{
-
         //REcuperer les donner à modifier
         setName(allData[index])
+        setIsShow(true)
+        setEditIndex(index)
+    }
+
+    const handleUpdate = () =>{
+        allData.splice(editIndex, 1, name)
+        setAllData([...allData])
+        setIsShow(false)
+        setName("")
+
     }
 
     return(
@@ -40,7 +50,12 @@ const Crud = () =>{
             <input value={name} onChange={(e)=>{
                 setName(e.target.value)
             }}/>
-            <button onClick={handleAdd}>Add</button>
+            {
+                !isShow ? <button onClick={handleAdd}>Add</button> :
+                <button onClick={
+                    handleUpdate
+                }>Update</button> 
+            }
             
             <h2>Liste</h2>
 
